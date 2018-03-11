@@ -9,7 +9,7 @@ class Pojo(@JsonProperty("sender") var sender: String = "",
 
     override fun equals(obj: Any?): Boolean {
         if(obj == null) {
-            return false
+            return false //not a comment
         }
         if(obj == this) {
             return true
