@@ -3,23 +3,9 @@ package com.armstring.pubnubchatapp.pojos
 import com.fasterxml.jackson.annotation.JsonProperty
 import java.util.*
 
-class Pojo constructor(@JsonProperty("sender") sender: String, @JsonProperty("message") message: String, @JsonProperty("timeStamp") timeStamp: String) {
-
-    private val sender: String? =null
-    private val message: String? = null
-    private val timeStamp: String? = null
-
-    public fun getSender(): String {
-        return this.sender!!
-    }
-
-    public fun getMessage(): String {
-        return this.message!!//means please make sure that this is not null( can't be null)
-    }
-
-    public fun getTimeStamp(): String {
-        return this.timeStamp!!
-    }
+class Pojo(@JsonProperty("sender") var sender: String = "",
+           @JsonProperty("message") var message: String = "",
+           @JsonProperty("timeStamp") var timeStamp: String = "") {
 
     override fun equals(obj: Any?): Boolean {
         if(obj == null) {

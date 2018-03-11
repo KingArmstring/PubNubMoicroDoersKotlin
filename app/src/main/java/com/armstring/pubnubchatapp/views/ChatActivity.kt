@@ -29,10 +29,10 @@ class ChatActivity : AppCompatActivity() {
         private val PUBSUB_CHANNEL: List<String> = Arrays.asList(Constants.CHANNEL_NAME)
     }
     private var mPubnub_DataStream: PubNub? = null
-    private var mPubSubAdapter: MyChatAdapter? = null
+    private lateinit var mPubSubAdapter: MyChatAdapter
     private var mPubSubPnCallback: Callback? = null
-    private var sharedPreferences: SharedPreferences? = null
-    private var userName: String? = null
+    private lateinit var sharedPreferences: SharedPreferences
+    private lateinit var userName: String
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -40,18 +40,17 @@ class ChatActivity : AppCompatActivity() {
         setContentView(R.layout.activity_chat)
 
         sharedPreferences = getSharedPreferences(Constants.DATASTREAM_PEERS, Context.MODE_PRIVATE)
-        if(!(sharedPreferences!!.contains(Constants.DATASTREAM_UUID))) {
-            var toLoginIntent: Intent = Intent(this@ChatActivity, LoginActivity::class.java)
+        if(!(sharedPreferences.contains(Constants.DATASTREAM_UUID))) {
+            val toLoginIntent: Intent = Intent(this@ChatActivity, LoginActivity::class.java)
             startActivity(toLoginIntent)
             finish()
             return
         }
-        userName = sharedPreferences!!.getString(Constants.DATASTREAM_UUID, "")
-        this.mPubSubAdapter = MyChatAdapter(this, 0, userName as String)
+        userName = sharedPreferences.getString(Constants.DATASTREAM_UUID, "")
 
-        //I think that this line is making a problem which is if you remove the "assert not null it does not work"
-        //and if you cast it into MyChatAdapter it stops complaining as well but same, does not work.
-        this.mPubSubPnCallback = Callback(this.mPubSubAdapter!!)//
+        mPubSubAdapter = MyChatAdapter(this, R.layout.list_row_pubsub1, userName)
+
+        mPubSubPnCallback = Callback(mPubSubAdapter)
 
 
         message_list.adapter = mPubSubAdapter
@@ -60,7 +59,7 @@ class ChatActivity : AppCompatActivity() {
     }
 
     private fun initPubNub() {
-        var configuration: PNConfiguration = PNConfiguration()
+        val configuration: PNConfiguration = PNConfiguration()
         configuration.publishKey = Constants.PUBNUB_PUBLISH_KEY
         configuration.subscribeKey = Constants.PUBNUB_SUBSCRIBE_KEY
         configuration.uuid = this.userName
@@ -82,7 +81,7 @@ class ChatActivity : AppCompatActivity() {
 
     fun btnSend(view: View) {
         @Suppress("NULLABILITY_MISMATCH_BASED_ON_JAVA_ANNOTATIONS")
-        var message: Map<String, String> = ImmutableMap.of<String, String>(
+        val message: Map<String, String> = ImmutableMap.of<String, String>(
                 "sender", this.userName,
                 "message", new_message.text.toString(),
                 "timestamp", DateTimeUtil.getTimeStampUtc())

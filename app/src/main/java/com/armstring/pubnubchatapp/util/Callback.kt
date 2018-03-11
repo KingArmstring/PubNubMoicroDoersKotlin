@@ -11,7 +11,7 @@ import com.pubnub.api.models.consumer.pubsub.PNMessageResult
 import com.pubnub.api.models.consumer.pubsub.PNPresenceEventResult
 
 
-open class Callback constructor(myChatAdapter: MyChatAdapter): SubscribeCallback() {
+open class Callback(myChatAdapter: MyChatAdapter): SubscribeCallback() {
 
     private var adapter: MyChatAdapter = myChatAdapter
 

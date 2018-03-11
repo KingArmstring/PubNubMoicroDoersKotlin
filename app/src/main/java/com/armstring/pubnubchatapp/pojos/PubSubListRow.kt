@@ -5,8 +5,8 @@ import android.widget.TextView
 
 open class PubSubListRow {
 
-    var sender: TextView? = null
-    var message: TextView? = null
-    var timeStamp: TextView? = null
+    lateinit var sender: TextView
+    lateinit var message: TextView
+    lateinit var timeStamp: TextView
 
 }
