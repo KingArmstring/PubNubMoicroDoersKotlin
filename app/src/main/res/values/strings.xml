@@ -1,0 +1,11 @@
+<resources>
+    <string name="app_name">PubNubChatApp</string>
+    <string name="log_in">Log In</string>
+    <string name="username">username</string>
+    <string name="send">Send</string>
+    <string name="time_placeholder">HH:MM</string>
+    <string name="user_name">User Name</string>
+    <string name="this_is_a_sample_real_time_message_from_the_data_stream_network">this is a sample real-time message from the data stream network</string>
+    <string name="microdoers_chat">MicroDoers Chat</string>
+    <string name="enter_message">Enter Message</string>
+</resources>
